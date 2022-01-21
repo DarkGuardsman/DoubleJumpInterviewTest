@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "djinterview:block/charge_table_side",
+    "north": "djinterview:block/charge_table_side",
+    "south": "djinterview:block/charge_table_side",
+    "east": "djinterview:block/charge_table_side",
+    "west": "djinterview:block/charge_table_side",
+    "up": "djinterview:block/charge_table_top",
+    "down": "djinterview:block/charge_table_top"
+  }
+}
