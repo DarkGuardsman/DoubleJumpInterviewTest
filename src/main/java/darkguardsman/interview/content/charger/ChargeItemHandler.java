@@ -14,8 +14,7 @@ public class ChargeItemHandler extends ItemStackHandler
 {
     public static final int SLOT_CHARGE_ITEM = 0;
     public static final int SLOT_FUEL_ITEM = 1;
-    public static final int SLOT_OUTPUT_ITEM = 2;
-    public static final int INVENTORY_SIZE = 3;
+    public static final int INVENTORY_SIZE = 2;
 
     private final ChargeCrafterEntity host;
 
@@ -40,7 +39,7 @@ public class ChargeItemHandler extends ItemStackHandler
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack)
     {
-        if (slot == SLOT_CHARGE_ITEM || slot == SLOT_OUTPUT_ITEM)
+        if (slot == SLOT_CHARGE_ITEM)
         {
             return stack.getItem() == ModItems.CHARGE.get();
         }

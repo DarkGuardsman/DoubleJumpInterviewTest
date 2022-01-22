@@ -3,8 +3,11 @@ package darkguardsman.interview.content.charger.gui;
 import darkguardsman.interview.content.ModBlocks;
 import darkguardsman.interview.content.ModMenu;
 import darkguardsman.interview.content.charger.ChargeCrafterEntity;
+import darkguardsman.interview.content.charger.ChargeFuelReg;
+import darkguardsman.interview.content.charger.ChargeItem;
 import darkguardsman.interview.content.charger.ChargeItemHandler;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -13,6 +16,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
@@ -21,10 +25,12 @@ import net.minecraftforge.items.wrapper.InvWrapper;
  */
 public class ChargeCrafterMenu extends AbstractContainerMenu
 {
-
     private final BlockEntity blockEntity;
     private final Player playerEntity;
     private final IItemHandler playerInventory;
+    private IItemHandler inventory;
+
+    protected final ItemStackHandler resultInv = new ItemStackHandler();
 
     public ChargeCrafterMenu(int windowId, BlockPos pos, Inventory playerInventory, Player player)
     {
@@ -35,11 +41,43 @@ public class ChargeCrafterMenu extends AbstractContainerMenu
 
         if (blockEntity instanceof ChargeCrafterEntity tile)
         {
-            addSlot(new SlotItemHandler(tile.inventory, ChargeItemHandler.SLOT_CHARGE_ITEM, 24, 35));
-            addSlot(new SlotItemHandler(tile.inventory, ChargeItemHandler.SLOT_FUEL_ITEM, 58, 35));
-            addSlot(new OutputSlot(tile.inventory, ChargeItemHandler.SLOT_OUTPUT_ITEM, 130, 35));
+            this.inventory = tile.inventory;
+            addSlot(new InputSlot(inventory, ChargeItemHandler.SLOT_CHARGE_ITEM, 24, 35, this::updateOutput));
+            addSlot(new InputSlot(inventory, ChargeItemHandler.SLOT_FUEL_ITEM, 58, 35, this::updateOutput));
+            addSlot(new OutputSlot(inventory, resultInv, 0, 130, 35));
         }
         layoutPlayerInventorySlots(8, 84);
+    }
+
+    @Override
+    public void slotsChanged(Container container)
+    {
+        super.slotsChanged(container);
+        updateOutput();
+
+    }
+
+    private void updateOutput()
+    {
+        //Reset inventory
+        resultInv.setStackInSlot(0, ItemStack.EMPTY);
+
+        //Generate new result
+        if (inventory != null)
+        {
+            final int fuelValue = ChargeFuelReg.getFuel(inventory.getStackInSlot(ChargeItemHandler.SLOT_FUEL_ITEM));
+            final ItemStack chargeStack = inventory.getStackInSlot(ChargeItemHandler.SLOT_CHARGE_ITEM);
+            if (chargeStack.getItem() instanceof ChargeItem item)
+            {
+                final int currentCharge = item.getCharge(chargeStack);
+                if (currentCharge + fuelValue < ChargeItem.MAX_CHARGE)
+                {
+                    final ItemStack newStack = chargeStack.copy();
+                    item.setCharge(newStack, currentCharge + fuelValue);
+                    resultInv.setStackInSlot(0, newStack);
+                }
+            }
+        }
     }
 
     @Override

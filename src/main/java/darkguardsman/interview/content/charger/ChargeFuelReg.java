@@ -1,7 +1,9 @@
 package darkguardsman.interview.content.charger;
 
 import darkguardsman.interview.content.ModItems;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
@@ -13,7 +15,7 @@ import java.util.Map;
 public class ChargeFuelReg //TODO implement as recipe system
 {
     //Can easily be expanded to also account for item data and tags
-    private static final Map<RegistryObject<Item>, Integer> FUEL_VALUES = new HashMap();
+    private static final Map<ResourceLocation, Integer> FUEL_VALUES = new HashMap();
 
     static
     {
@@ -31,7 +33,12 @@ public class ChargeFuelReg //TODO implement as recipe system
      */
     public static void addItem(RegistryObject<Item> item, int fuel)
     {
-        FUEL_VALUES.put(item, fuel);
+        FUEL_VALUES.put(item.getId(), fuel);
+    }
+
+    public static int getFuel(ItemStack stack)
+    {
+        return FUEL_VALUES.getOrDefault(stack.getItem().getRegistryName(), 0);
     }
 
     /**
@@ -42,6 +49,6 @@ public class ChargeFuelReg //TODO implement as recipe system
      */
     public static boolean isFuel(Item item)
     {
-        return FUEL_VALUES.keySet().stream().anyMatch(entry -> entry.get() == item);
+        return FUEL_VALUES.containsKey(item.getRegistryName());
     }
 }
