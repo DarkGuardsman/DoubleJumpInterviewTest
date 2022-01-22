@@ -4,5 +4,8 @@
   "item.djinterview.red_metal" : "Red Metal",
   "item.djinterview.green_metal" : "Green Metal",
   "item.djinterview.purple_metal" : "Purple Metal",
-  "item.djinterview.charge_item" : "Charge Item"
+  "item.djinterview.charge_item" : "Charge Item",
+  "item.djinterview.charger" : "Charger",
+  "block.djinterview.charger" : "Charger",
+  "screen.djinterview.charger": "Charger"
 }

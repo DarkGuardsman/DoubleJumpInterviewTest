@@ -1,7 +1,10 @@
 package darkguardsman.interview.client;
 
+import darkguardsman.interview.content.ModMenu;
+import darkguardsman.interview.content.charger.gui.ChargeCrafterScreen;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -20,6 +23,6 @@ public class InterviewClient
 
     public static void registerScreens(FMLClientSetupEvent event)
     {
-        //MenuScreens.register(MarbleMenus.MARBLE.get(), MarbleColorItemScreen::new);
+        MenuScreens.register(ModMenu.CHARGER.get(), ChargeCrafterScreen::new);
     }
 }
