@@ -32,14 +32,12 @@ public class GhoulModel extends EntityModel<Ghoul>
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -16.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.4F))
-		.texOffs(0, 0)
-				.addBox(-4.0F, -16.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)),
-				PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.4F))
+				.texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 16.0F, 0.0F, 1.309F, 0.0F, 0.0F));
 
 		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(33, 18).addBox(-5.0F, -7.0F, 0.0F, 10.0F, 18.0F, 6.0F, new CubeDeformation(0.4F))
-		.texOffs(0, 18).addBox(-5.0F, -7.0F, 0.0F, 10.0F, 18.0F, 6.0F, new CubeDeformation(0.0F))
-		.texOffs(69, 0).addBox(-1.5F, -4.5F, 7.0F, 4.0F, 12.0F, 2.0F, new CubeDeformation(0.4F)), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.2182F, 0.0F, 0.0F));
+				.texOffs(0, 18).addBox(-5.0F, -7.0F, 0.0F, 10.0F, 18.0F, 6.0F, new CubeDeformation(0.0F))
+				.texOffs(69, 0).addBox(-1.5F, -4.5F, 7.0F, 4.0F, 12.0F, 2.0F, new CubeDeformation(0.4F)), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.2182F, 0.0F, 0.0F));
 
 		PartDefinition right_arm = partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 51).addBox(-4.0F, -2.0F, -4.5F, 4.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.0F, 19.0F, 2.0F, 0.3927F, 0.0F, 0.0F));
 
@@ -48,7 +46,12 @@ public class GhoulModel extends EntityModel<Ghoul>
 
 	@Override
 	public void setupAnim(Ghoul entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		this.head.xRot = headPitch * ((float)Math.PI / 180F);
 
+		if(!entity.getEntityData().get(Ghoul.AWAKE)) {
+			this.head.xRot = 45;
+		}
 	}
 
 	@Override

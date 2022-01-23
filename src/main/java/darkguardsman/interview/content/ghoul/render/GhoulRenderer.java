@@ -1,5 +1,6 @@
 package darkguardsman.interview.content.ghoul.render;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import darkguardsman.interview.InterviewMod;
 import darkguardsman.interview.content.ghoul.Ghoul;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -20,7 +21,12 @@ public class GhoulRenderer extends MobRenderer<Ghoul, GhoulModel>
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Ghoul p_114482_)
+    protected void setupRotations(Ghoul ghoul, PoseStack poseStack, float yOffset, float bodyRotation, float partialTicks) {
+        super.setupRotations(ghoul, poseStack, yOffset, bodyRotation, partialTicks);
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(Ghoul ghoul)
     {
         return SKIN;
     }

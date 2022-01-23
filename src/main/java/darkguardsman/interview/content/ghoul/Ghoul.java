@@ -26,6 +26,11 @@ public class Ghoul extends Monster
     private static final String NBT_AWAKE = "Awake";
     public static final EntityDataAccessor<Boolean> AWAKE = SynchedEntityData.defineId(Ghoul.class, EntityDataSerializers.BOOLEAN);
 
+    private static final int TICKS_PER_SECOND = 20;
+    public static final int SLEEP_TIMER = TICKS_PER_SECOND * 20;
+
+    public int sleepCooldown = 0;
+
     public Ghoul(EntityType<? extends Ghoul> type, Level level)
     {
         super(type, level);
@@ -44,10 +49,6 @@ public class Ghoul extends Monster
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
-    protected void addBehaviourGoals() {
-
-    }
-
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 35.0D)
@@ -55,6 +56,15 @@ public class Ghoul extends Monster
                 .add(Attributes.ATTACK_DAMAGE, 3.0D)
                 .add(Attributes.ARMOR, 2.0D)
                 .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE);
+    }
+
+    @Override
+    public void tick()
+    {
+        super.tick();
+        if(sleepCooldown > 0) {
+            sleepCooldown--;
+        }
     }
 
 

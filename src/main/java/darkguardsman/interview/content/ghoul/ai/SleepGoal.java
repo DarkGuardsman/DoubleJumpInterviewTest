@@ -12,11 +12,6 @@ public class SleepGoal extends Goal
 {
     protected final Ghoul ghoul;
 
-    private static final int TICKS_PER_SECOND = 20;
-    public static final int SLEEP_TIMER = TICKS_PER_SECOND * 20;
-
-    private int coolDown = 0;
-
     public SleepGoal(Ghoul mob)
     {
         this.ghoul = mob;
@@ -26,7 +21,7 @@ public class SleepGoal extends Goal
     @Override
     public boolean canUse()
     {
-        return coolDown <= 0 && !hasValidTarget();
+        return ghoul.sleepCooldown <= 0 && !hasValidTarget();
     }
 
     @Override
@@ -53,21 +48,12 @@ public class SleepGoal extends Goal
     {
         ghoul.getEntityData().set(Ghoul.AWAKE, true);
         this.ghoul.setAggressive(true);
-        coolDown = SLEEP_TIMER;
+        ghoul.sleepCooldown = Ghoul.SLEEP_TIMER;
     }
 
     @Override
     public boolean requiresUpdateEveryTick()
     {
         return true;
-    }
-
-    @Override
-    public void tick()
-    {
-        if (coolDown > 0)
-        {
-            coolDown--;
-        }
     }
 }
