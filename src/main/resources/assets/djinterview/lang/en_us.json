@@ -6,6 +6,8 @@
   "item.djinterview.purple_metal" : "Purple Metal",
   "item.djinterview.charge_item" : "Charge Item",
   "item.djinterview.charger" : "Charge Table",
+  "item.djinterview.ghoul_egg" : "Ghoul Egg",
   "block.djinterview.charger" : "Charge Table",
-  "screen.djinterview.charger": "Charge Table"
+  "screen.djinterview.charger": "Charge Table",
+  "entity.djinterview.ghoul": "Ghoul"
 }

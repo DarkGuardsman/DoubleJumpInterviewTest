@@ -3,6 +3,7 @@ package darkguardsman.interview;
 import darkguardsman.interview.client.InterviewClient;
 import darkguardsman.interview.content.ModBlockEntities;
 import darkguardsman.interview.content.ModBlocks;
+import darkguardsman.interview.content.ModEntities;
 import darkguardsman.interview.content.ModItems;
 import darkguardsman.interview.content.ModMenu;
 import net.minecraftforge.api.distmarker.Dist;
@@ -21,6 +22,8 @@ public final class InterviewMod
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBlockEntities.BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModMenu.MENUS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModEntities::registerAttributes);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> InterviewClient::subscribeClientEvents);
     }
 }

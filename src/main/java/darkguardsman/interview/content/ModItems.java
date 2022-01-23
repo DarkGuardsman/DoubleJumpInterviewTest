@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -26,6 +27,9 @@ public class ModItems
 
     //Charge item
     public static final RegistryObject<Item> CHARGE = ITEMS.register("charge_item", () -> new ChargeItem(new Item.Properties().tab(ModCreativeTab.TAB).stacksTo(1)));
+
+    //Spawn eggs
+    public static final RegistryObject<Item> GHOUL_EGG = ITEMS.register("ghoul_egg", () -> new ForgeSpawnEggItem(ModEntities.GHOUL, 0x9ac55e, 0x92978c, new Item.Properties().tab(ModCreativeTab.TAB)));
 
     //Block that charges item via fuel crafting
     public static final RegistryObject<Item> CHARGER_BLOCK = fromBlock(ModBlocks.CHARGER);
