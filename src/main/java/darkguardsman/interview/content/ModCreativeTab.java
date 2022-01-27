@@ -19,6 +19,6 @@ public class ModCreativeTab extends CreativeTabs
     @Override
     public ItemStack getTabIconItem()
     {
-        return new ItemStack(ModItems.CHARGE);
+        return new ItemStack(ModItems.charge);
     }
 }

@@ -16,9 +16,9 @@ public class InputSlot extends SlotItemHandler
     }
 
     @Override
-    public void setChanged()
-    {
-        super.setChanged();
+    public void onSlotChanged() {
+
+        super.onSlotChanged();
         callback.call();
     }
 

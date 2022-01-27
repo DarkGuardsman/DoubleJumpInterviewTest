@@ -1,29 +1,37 @@
 package darkguardsman.interview;
 
-import darkguardsman.interview.client.InterviewClient;
-import darkguardsman.interview.content.ModBlockEntities;
-import darkguardsman.interview.content.ModBlocks;
-import darkguardsman.interview.content.ModEntities;
-import darkguardsman.interview.content.ModItems;
-import darkguardsman.interview.content.ModMenu;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(InterviewMod.ID)
+@Mod(modid = InterviewMod.ID, name = "DoubleJump Interview Mod", version = "0.1.0")
+
 public final class InterviewMod
 {
     public static final String ID = "djinterview";
 
-    public InterviewMod()
+    @SidedProxy(clientSide = "darkguardsman.interview.client.ClientProxy", serverSide = "darkguardsman.interview.CommonProxy")
+    public static CommonProxy proxy;
+
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event)
     {
-        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModBlockEntities.BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModMenu.MENUS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModEntities::registerAttributes);
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> InterviewClient::subscribeClientEvents);
+        proxy.preInit();
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event)
+    {
+        proxy.init();
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        proxy.postInit();
     }
 }
