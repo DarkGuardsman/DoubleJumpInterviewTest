@@ -1,23 +1,15 @@
 package darkguardsman.interview.content.charger;
 
-import net.minecraft.core.NonNullList;
-import net.minecraft.util.Mth;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by Robin Seifert on 1/21/2022.
  */
-public class ChargeItem extends Item
+public class ItemCharge extends Item
 {
     public static final int MAX_CHARGE = 200;
     public static final String NBT_CHARGE = "Charge";
-
-    public ChargeItem(Properties properties)
-    {
-        super(properties);
-    }
 
     public void setCharge(ItemStack stack, int amount) //Optionally could be a capability if cross mod support is desired
     {

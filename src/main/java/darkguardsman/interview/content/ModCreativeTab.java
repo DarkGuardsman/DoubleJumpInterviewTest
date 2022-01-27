@@ -1,15 +1,15 @@
 package darkguardsman.interview.content;
 
 import darkguardsman.interview.InterviewMod;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by Robin Seifert on 1/21/2022.
  */
-public class ModCreativeTab extends CreativeModeTab
+public class ModCreativeTab extends CreativeTabs
 {
-    public static final CreativeModeTab TAB = new ModCreativeTab();
+    public static final CreativeTabs TAB = new ModCreativeTab();
 
     public ModCreativeTab()
     {
@@ -17,8 +17,8 @@ public class ModCreativeTab extends CreativeModeTab
     }
 
     @Override
-    public ItemStack makeIcon()
+    public ItemStack getTabIconItem()
     {
-        return new ItemStack(ModItems.CHARGE.get());
+        return new ItemStack(ModItems.CHARGE);
     }
 }

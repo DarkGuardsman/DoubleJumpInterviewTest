@@ -1,6 +1,6 @@
 package darkguardsman.interview.content.charger.gui;
 
-import darkguardsman.interview.content.charger.ChargeItemHandler;
+import darkguardsman.interview.content.charger.InventoryChargeCrafter;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -23,8 +23,8 @@ public class OutputSlot extends SlotItemHandler
     public boolean mayPickup(Player playerIn)
     {
         return super.mayPickup(playerIn)
-                && !mainInv.extractItem(ChargeItemHandler.SLOT_CHARGE_ITEM, 1, true).isEmpty()
-                && !mainInv.extractItem(ChargeItemHandler.SLOT_FUEL_ITEM, 1, true).isEmpty();
+                && !mainInv.extractItem(InventoryChargeCrafter.SLOT_CHARGE_ITEM, 1, true).isEmpty()
+                && !mainInv.extractItem(InventoryChargeCrafter.SLOT_FUEL_ITEM, 1, true).isEmpty();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class OutputSlot extends SlotItemHandler
     public void onTake(Player player, ItemStack stack)
     {
         stack.onCraftedBy(player.level, player, stack.getCount());
-        mainInv.extractItem(ChargeItemHandler.SLOT_CHARGE_ITEM, 1, false);
-        mainInv.extractItem(ChargeItemHandler.SLOT_FUEL_ITEM, 1, false);
+        mainInv.extractItem(InventoryChargeCrafter.SLOT_CHARGE_ITEM, 1, false);
+        mainInv.extractItem(InventoryChargeCrafter.SLOT_FUEL_ITEM, 1, false);
     }
 }

@@ -1,7 +1,7 @@
 package darkguardsman.interview.content.charger.gui;
 
 import darkguardsman.interview.InterviewMod;
-import darkguardsman.interview.content.charger.ChargeCrafterEntity;
+import darkguardsman.interview.content.charger.TileEntityChargeCrafter;
 import lombok.AllArgsConstructor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -16,7 +16,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 @AllArgsConstructor
 public class ChargeCrafterMenuProvider implements MenuProvider
 {
-    private final ChargeCrafterEntity host;
+    private final TileEntityChargeCrafter host;
 
     @Override
     public Component getDisplayName() {

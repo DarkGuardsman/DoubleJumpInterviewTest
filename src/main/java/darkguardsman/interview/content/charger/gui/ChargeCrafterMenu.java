@@ -2,10 +2,10 @@ package darkguardsman.interview.content.charger.gui;
 
 import darkguardsman.interview.content.ModBlocks;
 import darkguardsman.interview.content.ModMenu;
-import darkguardsman.interview.content.charger.ChargeCrafterEntity;
-import darkguardsman.interview.content.charger.ChargeFuelReg;
-import darkguardsman.interview.content.charger.ChargeItem;
-import darkguardsman.interview.content.charger.ChargeItemHandler;
+import darkguardsman.interview.content.charger.TileEntityChargeCrafter;
+import darkguardsman.interview.api.ChargeFuelReg;
+import darkguardsman.interview.content.charger.ItemCharge;
+import darkguardsman.interview.content.charger.InventoryChargeCrafter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -39,11 +39,11 @@ public class ChargeCrafterMenu extends AbstractContainerMenu
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
 
-        if (blockEntity instanceof ChargeCrafterEntity tile)
+        if (blockEntity instanceof TileEntityChargeCrafter tile)
         {
             this.inventory = tile.inventory;
-            addSlot(new InputSlot(inventory, ChargeItemHandler.SLOT_CHARGE_ITEM, 24, 35, this::updateOutput));
-            addSlot(new InputSlot(inventory, ChargeItemHandler.SLOT_FUEL_ITEM, 58, 35, this::updateOutput));
+            addSlot(new InputSlot(inventory, InventoryChargeCrafter.SLOT_CHARGE_ITEM, 24, 35, this::updateOutput));
+            addSlot(new InputSlot(inventory, InventoryChargeCrafter.SLOT_FUEL_ITEM, 58, 35, this::updateOutput));
             addSlot(new OutputSlot(inventory, resultInv, 0, 130, 35));
         }
         layoutPlayerInventorySlots(8, 84);
@@ -65,12 +65,12 @@ public class ChargeCrafterMenu extends AbstractContainerMenu
         //Generate new result
         if (inventory != null)
         {
-            final int fuelValue = ChargeFuelReg.getFuel(inventory.getStackInSlot(ChargeItemHandler.SLOT_FUEL_ITEM));
-            final ItemStack chargeStack = inventory.getStackInSlot(ChargeItemHandler.SLOT_CHARGE_ITEM);
-            if (chargeStack.getItem() instanceof ChargeItem item)
+            final int fuelValue = ChargeFuelReg.getFuel(inventory.getStackInSlot(InventoryChargeCrafter.SLOT_FUEL_ITEM));
+            final ItemStack chargeStack = inventory.getStackInSlot(InventoryChargeCrafter.SLOT_CHARGE_ITEM);
+            if (chargeStack.getItem() instanceof ItemCharge item)
             {
                 final int currentCharge = item.getCharge(chargeStack);
-                if (currentCharge + fuelValue < ChargeItem.MAX_CHARGE)
+                if (currentCharge + fuelValue < ItemCharge.MAX_CHARGE)
                 {
                     final ItemStack newStack = chargeStack.copy();
                     item.setCharge(newStack, currentCharge + fuelValue);
@@ -89,8 +89,8 @@ public class ChargeCrafterMenu extends AbstractContainerMenu
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index)
     {
-        final int playerInvStartIndex = ChargeItemHandler.INVENTORY_SIZE;
-        final int playerInvEndIndex = ChargeItemHandler.INVENTORY_SIZE + 27;
+        final int playerInvStartIndex = InventoryChargeCrafter.INVENTORY_SIZE;
+        final int playerInvEndIndex = InventoryChargeCrafter.INVENTORY_SIZE + 27;
         final int playerBarEndIndex = playerInvEndIndex + 9;
 
         ItemStack itemstack = ItemStack.EMPTY;
@@ -101,7 +101,7 @@ public class ChargeCrafterMenu extends AbstractContainerMenu
             itemstack = stack.copy();
 
             //block -> inventory/hotbar
-            if (index < ChargeItemHandler.INVENTORY_SIZE)
+            if (index < InventoryChargeCrafter.INVENTORY_SIZE)
             {
                 if (!this.moveItemStackTo(stack, playerInvStartIndex, playerBarEndIndex, true))
                 {
@@ -112,7 +112,7 @@ public class ChargeCrafterMenu extends AbstractContainerMenu
             else
             {
                 //inventory/hotbar -> block
-                if (!this.moveItemStackTo(stack, 0, ChargeItemHandler.INVENTORY_SIZE, false))
+                if (!this.moveItemStackTo(stack, 0, InventoryChargeCrafter.INVENTORY_SIZE, false))
                 {
                     return ItemStack.EMPTY;
                 }
