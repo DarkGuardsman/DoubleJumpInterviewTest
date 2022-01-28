@@ -8,19 +8,21 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = InterviewMod.ID, name = "DoubleJump Interview Mod", version = "0.1.0")
-
 public final class InterviewMod
 {
     public static final String ID = "djinterview";
 
-    @SidedProxy(clientSide = "darkguardsman.interview.client.ClientProxy", serverSide = "darkguardsman.interview.CommonProxy")
-    public static CommonProxy proxy;
+    @SidedProxy(modId = InterviewMod.ID, clientSide = "darkguardsman.interview.client.ClientProxy", serverSide = "darkguardsman.interview.CommonProxy")
+    public static CommonProxy proxy = new CommonProxy();
+
+    @Mod.Instance(InterviewMod.ID)
+    public static InterviewMod INSTANCE;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
         proxy.preInit();
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, proxy);
     }
 
     @Mod.EventHandler

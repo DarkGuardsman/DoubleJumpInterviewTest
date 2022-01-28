@@ -1,0 +1,18 @@
+[{
+    "modid": "djinterview",
+    "name": "DoubleJump Interivew Mod",
+    "description": "Sample mod created as an interivew test for DoubleJump.com",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authors": ["DarkGuardsman"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "parent": "",
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "useDependencyInformation": "false"
+}]

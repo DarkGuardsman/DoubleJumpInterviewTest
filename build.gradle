@@ -7,7 +7,7 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
     }
 }
-        
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
@@ -20,7 +20,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 
 minecraft {
     mappings channel: 'snapshot', version: '20171003-1.12'
-    
+
     runs {
         client {
             workingDirectory project.file('run')
@@ -36,7 +36,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -53,4 +53,4 @@ jar {
         ])
     }
 }
-jar.finalizedBy('reobfJar') 
+jar.finalizedBy('reobfJar')
