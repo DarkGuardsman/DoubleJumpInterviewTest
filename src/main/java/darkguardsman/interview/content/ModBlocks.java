@@ -22,7 +22,7 @@ public class ModBlocks
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
-        event.getRegistry().register(new BlockChargeCrafter().setCreativeTab(ModCreativeTab.TAB).setUnlocalizedName("charger").setRegistryName(InterviewMod.ID, "charger"));
+        event.getRegistry().register(new BlockChargeCrafter().setCreativeTab(ModCreativeTab.TAB).setUnlocalizedName(InterviewMod.ID + ":charger").setRegistryName(InterviewMod.ID, "charger"));
 
         GameRegistry.registerTileEntity(TileEntityChargeCrafter.class, new ResourceLocation(InterviewMod.ID, "charger"));
     }

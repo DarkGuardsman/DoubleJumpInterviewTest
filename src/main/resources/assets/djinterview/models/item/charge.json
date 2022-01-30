@@ -1,6 +1,6 @@
 {
   "parent" : "item/generated",
   "textures" : {
-    "layer0" : "djinterview:item/charge_item"
+    "layer0" : "djinterview:items/charge_item"
   }
 }

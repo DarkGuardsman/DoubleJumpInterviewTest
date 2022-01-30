@@ -1,6 +1,6 @@
 {
   "parent" : "item/generated",
   "textures" : {
-    "layer0" : "djinterview:item/blue_metal"
+    "layer0" : "djinterview:items/blue_metal"
   }
 }
