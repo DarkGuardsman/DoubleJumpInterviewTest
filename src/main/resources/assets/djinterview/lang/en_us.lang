@@ -1,0 +1,20 @@
+# Mod lang file
+
+## Items
+item.djinterview:blue_metal.name=Blue Metal
+item.djinterview:red_metal.name=Red Metal
+item.djinterview:green_metal.name=Green Metal
+item.djinterview:purple_metal.name=Purple Metal
+item.djinterview:charge.name=Charge
+item.djinterview:charger.name=Charge Table
+item.djinterview:ghoul_egg.name=Ghoul Egg
+
+## Blocks
+block.djinterview:charger=Charge Table
+
+## UI
+itemGroup.djinterview=DJinterview Sample
+screen.djinterview:charger= Charge Table
+
+## Entity
+entity.djinterview:ghoul= Ghoul

@@ -1,7 +1,14 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "djinterview:charger"
+  },
   "variants": {
-    "": {
-      "model": "djinterview:block/charger"
-    }
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
   }
 }
