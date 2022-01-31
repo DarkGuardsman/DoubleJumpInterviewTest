@@ -56,7 +56,7 @@ public class ItemCharge extends Item
     @Override
     public double getDurabilityForDisplay(ItemStack stack)
     {
-        return (double) getCharge(stack) / (double) MAX_CHARGE;
+        return 1 - ((double) getCharge(stack) / (double) MAX_CHARGE);
     }
 
     @Override
