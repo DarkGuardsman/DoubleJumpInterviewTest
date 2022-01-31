@@ -10,11 +10,11 @@ item.djinterview:charger.name=Charge Table
 item.djinterview:ghoul_egg.name=Ghoul Egg
 
 ## Blocks
-block.djinterview:charger.name=Charge Table
+tile.djinterview:charger.name=Charge Table
 
 ## UI
 itemGroup.djinterview=DJinterview Sample
-screen.djinterview:charger= Charge Table
+container.djinterview:charger.name= Charge Table
 
 ## Entity
 entity.djinterview:ghoul= Ghoul
