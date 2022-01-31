@@ -3,6 +3,7 @@ package darkguardsman.interview.content.charger.gui;
 import darkguardsman.interview.InterviewMod;
 import darkguardsman.interview.content.charger.TileEntityChargeCrafter;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -23,8 +24,16 @@ public class GuiChargeCrafter extends GuiContainer
     }
 
     @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks)
+    {
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
+
+    @Override
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        final String inventoryName = new TextComponentTranslation("container.charger").getUnformattedText();
+        final String inventoryName = new TextComponentTranslation("container.djinterview:charger.name").getUnformattedText();
         this.fontRenderer.drawString(inventoryName, this.xSize / 2 - this.fontRenderer.getStringWidth(inventoryName) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.player.inventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
     }
