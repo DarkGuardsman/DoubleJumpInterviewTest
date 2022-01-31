@@ -16,11 +16,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ModItems {
     @GameRegistry.ObjectHolder(InterviewMod.ID + ":blue_metal")
     public static Item blueMetal;
-    @GameRegistry.ObjectHolder(InterviewMod.ID + ":blue_metal")
+    @GameRegistry.ObjectHolder(InterviewMod.ID + ":green_metal")
     public static Item greenMetal;
-    @GameRegistry.ObjectHolder(InterviewMod.ID + ":blue_metal")
+    @GameRegistry.ObjectHolder(InterviewMod.ID + ":purple_metal")
     public static Item purpleMetal;
-    @GameRegistry.ObjectHolder(InterviewMod.ID + ":blue_metal")
+    @GameRegistry.ObjectHolder(InterviewMod.ID + ":red_metal")
     public static Item redMetal;
     @GameRegistry.ObjectHolder(InterviewMod.ID + ":charge")
     public static Item charge;
