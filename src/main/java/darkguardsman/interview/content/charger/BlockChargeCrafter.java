@@ -1,5 +1,6 @@
 package darkguardsman.interview.content.charger;
 
+import darkguardsman.interview.InterviewMod;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -30,14 +31,14 @@ public class BlockChargeCrafter extends BlockContainer
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState blockState,
-                                    EntityPlayer player_, EnumHand hand, EnumFacing side,
+                                    EntityPlayer playerIn, EnumHand hand, EnumFacing side,
                                     float faceX, float faceY, float faceZ) {
         if (!world.isRemote)
         {
             final TileEntity tile = world.getTileEntity(pos);
             if (tile instanceof TileEntityChargeCrafter)
             {
-               //TODO open inventory
+                playerIn.openGui(InterviewMod.INSTANCE, 0, world, pos.getX(), pos.getY(), pos.getZ());
             }
 
         }
