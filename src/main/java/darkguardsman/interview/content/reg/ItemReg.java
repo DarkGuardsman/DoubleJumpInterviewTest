@@ -1,6 +1,7 @@
-package darkguardsman.interview.content;
+package darkguardsman.interview.content.reg;
 
 import darkguardsman.interview.InterviewMod;
+import darkguardsman.interview.content.ModCreativeTab;
 import darkguardsman.interview.content.charger.ItemCharge;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -13,7 +14,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * Created by Robin Seifert on 12/21/2021.
  */
 @Mod.EventBusSubscriber(modid = InterviewMod.ID)
-public class ModItems {
+public class ItemReg
+{
     @GameRegistry.ObjectHolder(InterviewMod.ID + ":blue_metal")
     public static Item blueMetal;
     @GameRegistry.ObjectHolder(InterviewMod.ID + ":green_metal")
@@ -42,7 +44,7 @@ public class ModItems {
         //event.getRegistry().register("ghoul_egg", () -> new ForgeSpawnEggItem(ModEntities.GHOUL, 0x9ac55e, 0x92978c, new Item.Properties().tab(ModCreativeTab.TAB)));
 
         //Block that charges item via fuel crafting
-        event.getRegistry().register(new ItemBlock(ModBlocks.charger).setCreativeTab(ModCreativeTab.TAB).setRegistryName(ModBlocks.charger.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(BlockReg.charger).setCreativeTab(ModCreativeTab.TAB).setRegistryName(BlockReg.charger.getRegistryName()));
     }
 
     private static Item newItem(String name) {

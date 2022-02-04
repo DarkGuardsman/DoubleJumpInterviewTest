@@ -1,6 +1,7 @@
 package darkguardsman.interview.content;
 
 import darkguardsman.interview.InterviewMod;
+import darkguardsman.interview.content.reg.ItemReg;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -19,6 +20,6 @@ public class ModCreativeTab extends CreativeTabs
     @Override
     public ItemStack getTabIconItem()
     {
-        return new ItemStack(ModItems.charge);
+        return new ItemStack(ItemReg.charge);
     }
 }

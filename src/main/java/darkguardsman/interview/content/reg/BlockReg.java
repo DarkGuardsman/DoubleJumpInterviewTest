@@ -1,6 +1,7 @@
-package darkguardsman.interview.content;
+package darkguardsman.interview.content.reg;
 
 import darkguardsman.interview.InterviewMod;
+import darkguardsman.interview.content.ModCreativeTab;
 import darkguardsman.interview.content.charger.BlockChargeCrafter;
 import darkguardsman.interview.content.charger.TileEntityChargeCrafter;
 import net.minecraft.block.Block;
@@ -14,7 +15,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * Created by Robin Seifert on 1/21/2022.
  */
 @Mod.EventBusSubscriber(modid = InterviewMod.ID)
-public class ModBlocks
+public class BlockReg
 {
     @GameRegistry.ObjectHolder(InterviewMod.ID + ":charger")
     public static Block charger;

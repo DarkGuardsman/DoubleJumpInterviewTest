@@ -2,7 +2,7 @@ package darkguardsman.interview.content.charger;
 
 
 import darkguardsman.interview.api.ChargeFuelReg;
-import darkguardsman.interview.content.ModItems;
+import darkguardsman.interview.content.reg.ItemReg;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -45,7 +45,7 @@ public class InventoryChargeCrafter extends ItemStackHandler
     {
         if (slot == SLOT_CHARGE_ITEM)
         {
-            return stack.getItem() == ModItems.charge;
+            return stack.getItem() == ItemReg.charge;
         }
         else if (slot == SLOT_FUEL_ITEM)
         {

@@ -1,4 +1,4 @@
-package darkguardsman.interview.content;
+package darkguardsman.interview.content.reg;
 
 import darkguardsman.interview.InterviewMod;
 import darkguardsman.interview.api.ChargeFuelReg;
@@ -11,14 +11,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * Created by Robin Seifert on 1/27/2022.
  */
 @Mod.EventBusSubscriber(modid = InterviewMod.ID)
-public class ModRecipes
+public class ReceipeReg
 {
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
-        ChargeFuelReg.addItem(ModItems.purpleMetal, 100);
-        ChargeFuelReg.addItem(ModItems.redMetal, 30);
-        ChargeFuelReg.addItem(ModItems.greenMetal, 5);
-        ChargeFuelReg.addItem(ModItems.blueMetal, 1);
+        ChargeFuelReg.addItem(ItemReg.purpleMetal, 100);
+        ChargeFuelReg.addItem(ItemReg.redMetal, 30);
+        ChargeFuelReg.addItem(ItemReg.greenMetal, 5);
+        ChargeFuelReg.addItem(ItemReg.blueMetal, 1);
     }
 }
