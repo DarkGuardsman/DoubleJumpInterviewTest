@@ -7,7 +7,6 @@ buildscript {
             name 'FancyGradle'
             url 'https://gitlab.com/api/v4/projects/26758973/packages/maven'
         }
-
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:5.+'
@@ -29,9 +28,9 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 fancyGradle {
     patches {
         resources
+        asm
     }
 }
-
 
 minecraft {
     mappings channel: 'snapshot', version: '20171003-1.12'
