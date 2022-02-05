@@ -1,12 +1,14 @@
 package darkguardsman.interview.content.ghoul.render;
 
+import darkguardsman.interview.content.ghoul.EntityGhoul;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelZombie;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
-public class ModelGhoul extends ModelBase
-{
+public class ModelGhoul extends ModelBase {
     private final ModelRenderer Head;
     private final ModelRenderer Body;
     private final ModelRenderer BodyBlock_r1;
@@ -23,8 +25,10 @@ public class ModelGhoul extends ModelBase
     private final ModelRenderer wingl3_r1;
     private final ModelRenderer wingl2_r1;
 
-    public ModelGhoul()
-    {
+    private final float defaultHeadAngle;
+    private final float defaultArmAngle;
+
+    public ModelGhoul() {
         textureWidth = 128;
         textureHeight = 64;
 
@@ -113,11 +117,13 @@ public class ModelGhoul extends ModelBase
         WingL.addChild(wingl2_r1);
         setRotationAngle(wingl2_r1, -0.2618F, 0.0F, 0.0F);
         wingl2_r1.cubeList.add(new ModelBox(wingl2_r1, 96, 49, -3.5F, 2.5F, -3.0F, 1, 1, 12, 0.0F, true));
+
+        defaultArmAngle = this.RightArm.rotateAngleX;
+        defaultHeadAngle = this.Head.rotateAngleX;
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         Head.render(f5);
         Body.render(f5);
         RightArm.render(f5);
@@ -126,17 +132,36 @@ public class ModelGhoul extends ModelBase
         WingL.render(f5);
     }
 
-    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
 
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-    {
-        // Arms are this.RightArm & this.LeftArm
-        // Head is this.Head
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+
+        //Reset model to defaults
+        this.RightArm.rotateAngleX = defaultArmAngle;
+        this.LeftArm.rotateAngleX = defaultArmAngle;
+        this.Head.rotateAngleX = defaultHeadAngle;
+        this.WingL.rotateAngleY = 0;
+        this.WingR.rotateAngleY = 0;
+
+        //Apply instance specific rotations
+        if (entityIn instanceof EntityGhoul) {
+            final EntityGhoul ghoul = (EntityGhoul) entityIn;
+            if (ghoul.isSleeping()) {
+                this.RightArm.rotateAngleX = (float) Math.toRadians(60);
+                this.LeftArm.rotateAngleX = (float) Math.toRadians(60);
+                this.Head.rotateAngleX = (float) Math.toRadians(55);
+            } else {
+                this.Head.rotateAngleX = headPitch * 0.017453292F;
+                this.Head.rotateAngleY = netHeadYaw * 0.017453292F;
+
+                this.WingR.rotateAngleY = Math.min(0, -MathHelper.cos(limbSwing * 0.6662F) * 5F * limbSwingAmount);
+                this.WingL.rotateAngleY = Math.max(0, MathHelper.cos(limbSwing * 0.6662F) * 5F * limbSwingAmount);
+            }
+        }
     }
 }

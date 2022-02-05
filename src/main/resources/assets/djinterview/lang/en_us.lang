@@ -17,4 +17,4 @@ itemGroup.djinterview=DJinterview Sample
 container.djinterview:charger.name= Charge Table
 
 ## Entity
-entity.djinterview:ghoul= Ghoul
+entity.djinterview:ghoul.name= Ghoul

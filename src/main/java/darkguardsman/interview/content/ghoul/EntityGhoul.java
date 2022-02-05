@@ -1,5 +1,6 @@
 package darkguardsman.interview.content.ghoul;
 
+import darkguardsman.interview.content.ghoul.ai.EntityAIDash;
 import darkguardsman.interview.content.ghoul.ai.EntityAISleeping;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -11,6 +12,8 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -27,9 +30,12 @@ public class EntityGhoul extends EntityMob
     private static final DataParameter<Boolean> IS_SLEEPING = EntityDataManager.createKey(EntityGhoul.class, DataSerializers.BOOLEAN);
 
     private static final int TICKS_PER_SECOND = 20;
+
     public static final int SLEEP_TIMER = TICKS_PER_SECOND * 20;
+    public static final int DASH_TIMER = TICKS_PER_SECOND * 5;
 
     public int sleepCooldown = 0;
+    public int dashCooldown = 0;
 
     public EntityGhoul(World worldIn)
     {
@@ -41,17 +47,17 @@ public class EntityGhoul extends EntityMob
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAISleeping(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
+        this.tasks.addTask(2, new EntityAIDash(this));
+        this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
         this.applyEntityAI();
     }
 
     protected void applyEntityAI()
     {
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        //this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySheep.class, true));
     }
 
     @Override
@@ -77,6 +83,10 @@ public class EntityGhoul extends EntityMob
         if (sleepCooldown > 0)
         {
             sleepCooldown--;
+        }
+        if (dashCooldown > 0)
+        {
+            dashCooldown--;
         }
     }
 
